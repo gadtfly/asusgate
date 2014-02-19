@@ -47,7 +47,8 @@ end
 
 group :production do
   gem 'pg'
+  gem 'rails_12factor'
 end
 
-gem 'rails_12factor'
 gem 'haml-rails'
+gem 'bootstrap-sass', '~> 3.1.1'

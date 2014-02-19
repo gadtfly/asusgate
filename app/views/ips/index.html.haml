@@ -1,0 +1,21 @@
+.page-header
+.row
+  .col-md-4
+    .row
+      .panel{class: "panel-#{fucked? ? 'danger' : 'success'}"}
+        .panel-body
+          %h1 Your IP is
+          %h1.ip= link_to request.ip, "ftp://#{request.ip}"
+        .panel-heading
+          You are #{link_to "probably#{' not' unless fucked?}", "##{request.ip}", class: 'status'} fucked
+    .row.small Disclaimer: I have nothing to do with any of this, and am only providing a tool for those affected to check their status.
+  .col-md-8
+    = render 'text'
+
+- cache do
+  .panel.panel-default
+    .panel-heading
+      IPs of people who are fucked (from #{link_to 'http://pastebin.com/ASfYTWgw', 'http://pastebin.com/ASfYTWgw'})
+    .panel-body
+      - @ips.each do |ip|
+        .col-md-2= link_to ip.ip, "ftp://#{ip.ip}", id: ip.ip
