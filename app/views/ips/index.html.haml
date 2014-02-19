@@ -1,21 +1,35 @@
 .page-header
+  = link_to 'http://arstechnica.com/security/2014/02/dear-asus-router-user-youve-been-pwned-thanks-to-easily-exploited-flaw/' do
+    %blockquote
+      Dear Asus router user: You’ve been pwned, thanks to easily exploited flaw
+      %small Ars Technica article
 .row
   .col-md-4
-    .row
-      .panel{class: "panel-#{fucked? ? 'danger' : 'success'}"}
-        .panel-body
-          %h1 Your IP is
-          %h1.ip= link_to request.ip, "ftp://#{request.ip}"
-        .panel-heading
-          You are #{link_to "probably#{' not' unless fucked?}", "##{request.ip}", class: 'status'} fucked
-    .row.small Disclaimer: I have nothing to do with any of this, and am only providing a tool for those affected to check their status.
+    .panel{class: "panel-#{fucked? ? 'danger' : 'success'}"}
+      .panel-heading
+        %h1 Your IP is:
+      .panel-body
+        %h1.ip= link_to request.ip, "ftp://#{request.ip}"
+      .panel-heading
+        You are #{link_to "probably#{' not' unless fucked?}", "##{request.ip}", class: 'status'} fucked
+        - if fucked?
+          upgrade your firmware immediately
+        - else
+          .small (in this particular way, anyway)
   .col-md-8
-    = render 'text'
-
-- cache do
-  .panel.panel-default
-    .panel-heading
-      IPs of people who are fucked (from #{link_to 'http://pastebin.com/ASfYTWgw', 'http://pastebin.com/ASfYTWgw'})
-    .panel-body
-      - @ips.each do |ip|
-        .col-md-2= link_to ip.ip, "ftp://#{ip.ip}", id: ip.ip
+    .panel.panel-default
+      .panel-heading
+        Juicy propaganda from the group* who leaked this:
+        .disclaimer
+          %small (*whom I have absolutely no affiliation with)
+      .panel-body= render 'text'
+%hr
+- if Rails.env.production?
+  [redacted because I'd rather not be sued: #{IP.count} ftp links, directly to files of people with these routers, open to the entire internet]
+- else
+  - cache do
+    .panel.panel-default
+      .panel-heading IPs from the release (from #{link_to 'http://pastebin.com/ASfYTWgw', 'http://pastebin.com/ASfYTWgw'})
+      .panel-body
+        - @ips.each do |ip|
+          .col-md-2= link_to ip.ip, "ftp://#{ip.ip}", id: ip.ip
