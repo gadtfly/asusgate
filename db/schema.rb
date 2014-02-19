@@ -13,11 +13,14 @@
 
 ActiveRecord::Schema.define(version: 20140219175710) do
 
-  create_table "ips", primary_key: "ip", force: true do |t|
+  create_table "ips", id: false, force: true do |t|
+    t.integer "ip", limit: 8
   end
 
+  add_index "ips", ["ip"], name: "index_ips_on_ip"
+
   create_table "visits", force: true do |t|
-    t.integer  "ip"
+    t.integer  "ip",         limit: 8
     t.string   "referrer"
     t.datetime "created_at"
     t.datetime "updated_at"
