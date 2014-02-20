@@ -5,9 +5,7 @@ class ApplicationController < ActionController::Base
 
   before_action :log_visit
   def log_visit
-    # Ooops, overloading Heroku DB
-    # @visit = Visit.create(ip: request.ip, referrer: request.referrer)
-    @visit = Visit.new(ip: request.ip, referrer: request.referrer)
+    @visit = Visit.create(ip: request.ip, referrer: request.referrer)
   end
   attr_reader :visit
   helper_method :visit
