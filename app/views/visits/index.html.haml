@@ -1,0 +1,10 @@
+%h1 Latest Visits:
+%ul.list-group
+- @visits.each do |visit|
+  %li.list-group-item{class: ('list-group-item-danger' if visit.fucked?)}
+    .row
+      .col-xs-3= visit.referrer
+      .col-xs-2= link_to visit.ip, "ftp://#{visit.ip}"
+      .col-xs-2= visit.domain
+      .col-xs-2= visit.location
+      .col-xs-3= visit.created_at.in_time_zone('Pacific Time (US & Canada)')

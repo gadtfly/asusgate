@@ -53,3 +53,5 @@ end
 gem 'haml-rails'
 gem 'bootstrap-sass'
 gem 'newrelic_rpm'
+gem 'devise'
+gem 'geocoder'

@@ -1,12 +1,12 @@
-.panel{class: "panel-#{fucked? ? 'danger' : 'success'}"}
+.panel{class: "panel-#{visit.fucked? ? 'danger' : 'success'}"}
   .panel-heading
     %h1 Your IP is:
   .panel-body
     %h1.ip= link_to request.ip, "ftp://#{request.ip}"
   .panel-heading
-    You are #{link_to "probably#{' not' unless fucked?}", "ftp://#{request.ip}", class: 'status'} fucked
+    You are #{link_to "probably#{' not' unless visit.fucked?}", "ftp://#{request.ip}", class: 'status'} fucked
     %p 
-      - if fucked?
+      - if visit.fucked?
         Update your firmware ASAP
       - else
         %small (in this particular way, anyway)

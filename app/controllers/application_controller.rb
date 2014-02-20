@@ -4,8 +4,13 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   before_action :log_visit
-
   def log_visit
-    Visit.create(ip: request.ip, referrer: request.referrer)
+    @visit = Visit.create(ip: request.ip, referrer: request.referrer)
+  end
+  attr_reader :visit
+  helper_method :visit
+
+  def after_sign_in_path_for(user)
+    :visits
   end
 end
