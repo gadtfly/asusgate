@@ -1,0 +1,6 @@
+- cache do
+  .panel.panel-default
+    .panel-heading IPs from the release (from #{link_to 'http://pastebin.com/ASfYTWgw', 'http://pastebin.com/ASfYTWgw'})
+    .panel-body
+      - @ips.each do |ip|
+        .col-md-2= link_to ip.ip, "ftp://#{ip.ip}", id: ip.ip

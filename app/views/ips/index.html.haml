@@ -5,31 +5,11 @@
       %small Ars Technica article
 .row
   .col-md-4
-    .panel{class: "panel-#{fucked? ? 'danger' : 'success'}"}
-      .panel-heading
-        %h1 Your IP is:
-      .panel-body
-        %h1.ip= link_to request.ip, "ftp://#{request.ip}"
-      .panel-heading
-        You are #{link_to "probably#{' not' unless fucked?}", "##{request.ip}", class: 'status'} fucked
-        - if fucked?
-          upgrade your firmware immediately
-        - else
-          .small (in this particular way, anyway)
+    = render 'warning'
   .col-md-8
-    .panel.panel-default
-      .panel-heading
-        Juicy propaganda from the group* who leaked this:
-        .disclaimer
-          %small (*whom I have absolutely no affiliation with)
-      .panel-body= render 'text'
+    = render 'message'
 %hr
 - if Rails.env.production?
-  [redacted because I'd rather not be sued: #{IP.count} ftp links, directly to files of people with these routers, open to the entire internet]
+  [redacted: #{IP.count} ftp links, directly to files of people with these routers, open to the entire internet]
 - else
-  - cache do
-    .panel.panel-default
-      .panel-heading IPs from the release (from #{link_to 'http://pastebin.com/ASfYTWgw', 'http://pastebin.com/ASfYTWgw'})
-      .panel-body
-        - @ips.each do |ip|
-          .col-md-2= link_to ip.ip, "ftp://#{ip.ip}", id: ip.ip
+  = render 'list'
