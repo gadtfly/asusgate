@@ -1,0 +1,2 @@
+* Move API calls on visit to permanent column, saved on creation (watch out for exceptions)
+* Do geolocation on IP table
