@@ -1,5 +1,5 @@
 class IpsController < ApplicationController
   def index
-    @ips = IP.all unless Rails.env.production?
+    @ips = IP.all if current_user
   end
 end

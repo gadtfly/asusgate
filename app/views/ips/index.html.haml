@@ -9,7 +9,7 @@
   .col-lg-8.col-md-7
     = render 'message'
 %hr
-- if Rails.env.production?
-  [redacted: #{IP.count} ftp links, directly to files of people with these routers, open to the entire internet]
+- if @ips
+  [redacted: #{@ips.count} ftp links, directly to files of people with these routers, open to the entire internet]
 - else
-  = render 'list'
+  = render 'list', locals: { ips: @ips }
